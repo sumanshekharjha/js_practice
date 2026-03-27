@@ -1,0 +1,118 @@
+<!-- todo list using JS -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do list using JS</title>
+ </head>
+ <style>
+    body {
+    margin: 20px;
+     display: flex;
+    flex-wrap:wrap;
+    gap:20px;
+    height: auto;
+    background: linear-gradient(45deg, #191919, #717c8b);
+    overflow:scroll;
+}
+.card {
+    margin:10px;
+    display:flex;
+    flex-direction: column;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:whitesmoke;
+    border: 1px solid black;
+    width: 350px;
+    height:50vh;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #0d0d0d, #3a4452);
+}
+.card1 {
+    margin:10px;
+    display:flex;
+    flex-direction: column;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:whitesmoke;
+    border: 1px solid black;
+    width: 350px;
+    height:50vh;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #0d0d0d, #3a4452);
+    justify-content: center;
+    align-items: center;
+}
+.circle{
+    border: 3px solid gray;
+    padding:30px;
+    border-radius: 50%;
+}
+.add{
+    font-size:30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.task span {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.task button {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.addTaskBtn {
+    margin-top: 10px;
+    padding: 5px;
+    background: #3a4452;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+    </style>
+ <body>
+   <!-- <div class="card">
+  <h1 style="margin-left:60px; "> TO DO LIST</h1>
+
+
+   </div>  -->
+<div class="card">
+    <h2>TO DO 1</h2>
+    <div class="tasks"></div>
+    <div class="addTaskBtn">+ Add Task</div>
+</div>
+   <div class="card1" id="addCard">
+    <div class="circle" >
+        <div class="add">+</div>
+    </div>
+   </div>
+   
+ </body>
+ <script>
+
+let addCard = document.getElementById('addCard');
+let count=1;
+
+// Add new card when clicking +
+  addCard.addEventListener('click',()=>{
+    const newCard = document.createElement('div');
+    newCard.className='card';
+    newCard.innerHTML=`<h2>TO DO ${count}</h2>`;
+    document.body.insertBefore(newCard, addCard);
+    count++;
+  })
+ </script>
+ </html>
