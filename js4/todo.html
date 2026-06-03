@@ -1,118 +1,268 @@
 <!-- todo list using JS -->
- <!DOCTYPE html>
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do list using JS</title>
- </head>
- <style>
-    body {
-    margin: 20px;
-     display: flex;
-    flex-wrap:wrap;
-    gap:20px;
-    height: auto;
-    background: linear-gradient(45deg, #191919, #717c8b);
-    overflow:scroll;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>To Do list using JS</title>
+</head>
+<style>
+body {
+   margin: 20px;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px;
+   height: auto;
+   background: linear-gradient(45deg, #191919, #717c8b);
+   overflow: scroll;
 }
 .card {
-    margin:10px;
-    display:flex;
-    flex-direction: column;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color:whitesmoke;
-    border: 1px solid black;
-    width: 350px;
-    height:50vh;
-    padding: 15px;
-    border-radius: 10px;
-    background: linear-gradient(45deg, #0d0d0d, #3a4452);
+   margin: 10px;
+   display: flex;
+   flex-direction: column;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   color: whitesmoke;
+   border: 1px solid black;
+   width: 350px;
+   height: 50vh;
+   padding: 15px;
+   border-radius: 10px;
+   background: linear-gradient(45deg, #0d0d0d, #3a4452);
+   overflow-y: auto;
 }
 .card1 {
-    margin:10px;
-    display:flex;
-    flex-direction: column;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color:whitesmoke;
-    border: 1px solid black;
-    width: 350px;
-    height:50vh;
-    padding: 15px;
-    border-radius: 10px;
-    background: linear-gradient(45deg, #0d0d0d, #3a4452);
-    justify-content: center;
-    align-items: center;
+   margin: 10px;
+   display: flex;
+   flex-direction: column;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   color: whitesmoke;
+   border: 1px solid black;
+   width: 350px;
+   height: 50vh;
+   padding: 15px;
+   border-radius: 10px;
+   background: linear-gradient(45deg, #0d0d0d, #3a4452);
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
 }
-.circle{
-    border: 3px solid gray;
-    padding:30px;
-    border-radius: 50%;
+.circle {
+   border: 3px solid gray;
+   padding: 30px;
+   border-radius: 50%;
 }
-.add{
-    font-size:30px;
-    text-align: center;
-    cursor: pointer;
+.add {
+   font-size: 30px;
+   text-align: center;
+   cursor: pointer;
 }
 
+/* ── Task row ── */
 .task {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 5px 0;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin: 5px 0;
 }
-
 .task span {
-    flex: 1;
-    margin-left: 10px;
+   flex: 1;
+   margin-left: 10px;
+   word-break: break-word;
 }
-
+/* Line-through when checkbox is checked */
+.task span.done {
+   text-decoration: line-through;
+   opacity: 0.5;
+}
 .task button {
-    margin-left: 10px;
-    cursor: pointer;
+   margin-left: 10px;
+   cursor: pointer;
+   background: transparent;
+   border: 1px solid #ff6b6b;
+   color: #ff6b6b;
+   border-radius: 4px;
+   padding: 2px 7px;
+   font-size: 13px;
+}
+.task button:hover {
+   background: #ff6b6b;
+   color: white;
 }
 
+/* ── Inline input row (shown when + Add Task is clicked) ── */
+.inputRow {
+   display: flex;
+   gap: 6px;
+   margin-top: 6px;
+}
+.inputRow input {
+   flex: 1;
+   padding: 5px 8px;
+   border-radius: 5px;
+   border: 1px solid #555;
+   background: #1e2530;
+   color: whitesmoke;
+   font-size: 14px;
+   outline: none;
+}
+.inputRow input:focus {
+   border-color: #7a8fa6;
+}
+.inputRow button {
+   padding: 5px 10px;
+   border-radius: 5px;
+   border: none;
+   background: #4a90d9;
+   color: white;
+   cursor: pointer;
+   font-size: 14px;
+}
+.inputRow button:hover {
+   background: #357ab8;
+}
+
+/* ── Add Task button ── */
 .addTaskBtn {
-    margin-top: 10px;
-    padding: 5px;
-    background: #3a4452;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    font-weight: bold;
+   margin-top: auto;
+   padding: 6px;
+   background: #3a4452;
+   border-radius: 5px;
+   text-align: center;
+   cursor: pointer;
+   font-weight: bold;
+   border: 1px solid #555;
+   user-select: none;
 }
+.addTaskBtn:hover {
+   background: #4a5568;
+}
+</style>
+<body>
 
-    </style>
- <body>
-   <!-- <div class="card">
-  <h1 style="margin-left:60px; "> TO DO LIST</h1>
-
-
-   </div>  -->
-<div class="card">
-    <h2>TO DO 1</h2>
-    <div class="tasks"></div>
-    <div class="addTaskBtn">+ Add Task</div>
-</div>
-   <div class="card1" id="addCard">
-    <div class="circle" >
-        <div class="add">+</div>
-    </div>
+   <!-- Static first card -->
+   <div class="card">
+      <h2>TO DO 1</h2>
+      <div class="tasks"></div>
+      <!-- Input row hidden by default, shown on Add Task click -->
+      <div class="inputRow" style="display:none;">
+         <input type="text" placeholder="Enter task..." />
+         <button>Add</button>
+      </div>
+      <div class="addTaskBtn">+ Add Task</div>
    </div>
-   
- </body>
- <script>
 
-let addCard = document.getElementById('addCard');
-let count=1;
+   <!-- The "+" card for creating new cards -->
+   <div class="card1" id="addCard">
+      <div class="circle">
+         <div class="add">+</div>
+      </div>
+   </div>
 
-// Add new card when clicking +
-  addCard.addEventListener('click',()=>{
-    const newCard = document.createElement('div');
-    newCard.className='card';
-    newCard.innerHTML=`<h2>TO DO ${count}</h2>`;
-    document.body.insertBefore(newCard, addCard);
-    count++;
-  })
- </script>
- </html>
+</body>
+<script>
+
+   let cardCount = 2; // starts at 2 because TO DO 1 is already in HTML
+   let addCard = document.getElementById('addCard');
+
+   // creates and returns a new card element
+   function createCard(title) {
+      let card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+         <h2>${title}</h2>
+         <div class="tasks"></div>
+         <div class="inputRow" style="display:none;">
+            <input type="text" placeholder="Enter task..." />
+            <button>Add</button>
+         </div>
+         <div class="addTaskBtn">+ Add Task</div>
+      `;
+      return card;
+   }
+
+   // creates a task row (checkbox + text + delete) inside the given card
+   function addTaskToCard(card, taskText) {
+      if (!taskText || taskText.trim() === '') return;
+
+      let tasksContainer = card.querySelector('.tasks');
+
+      let taskDiv = document.createElement('div');
+      taskDiv.className = 'task';
+
+      let checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+
+      let span = document.createElement('span');
+      span.textContent = taskText.trim();
+
+      let deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '✕';
+
+      // toggle line-through when checkbox is checked/unchecked
+      checkbox.addEventListener('change', function () {
+         if (checkbox.checked) {
+            span.classList.add('done');
+         } else {
+            span.classList.remove('done');
+         }
+      });
+
+      deleteBtn.addEventListener('click', function () {
+         tasksContainer.removeChild(taskDiv);
+      });
+
+      taskDiv.appendChild(checkbox);
+      taskDiv.appendChild(span);
+      taskDiv.appendChild(deleteBtn);
+      tasksContainer.appendChild(taskDiv);
+   }
+
+   function showInputRow(card) {
+      let inputRow = card.querySelector('.inputRow');
+      inputRow.style.display = 'flex';
+      inputRow.querySelector('input').focus();
+   }
+
+   function hideInputRow(card) {
+      let inputRow = card.querySelector('.inputRow');
+      inputRow.style.display = 'none';
+      inputRow.querySelector('input').value = '';
+   }
+
+   // one click listener handles all cards (current and future)
+   document.body.addEventListener('click', function (event) {
+
+      let addTaskBtn = event.target.closest('.addTaskBtn');
+      if (addTaskBtn) {
+         showInputRow(addTaskBtn.closest('.card'));
+         return;
+      }
+
+      let inputRow = event.target.closest('.inputRow');
+      if (inputRow && event.target.tagName === 'BUTTON') {
+         let parentCard = inputRow.closest('.card');
+         addTaskToCard(parentCard, inputRow.querySelector('input').value);
+         hideInputRow(parentCard);
+         return;
+      }
+
+      if (event.target.closest('#addCard')) {
+         let newCard = createCard('TO DO ' + cardCount);
+         cardCount++;
+         document.body.insertBefore(newCard, addCard);
+      }
+
+   });
+
+   // submit task on Enter key
+   document.body.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' && event.target.closest('.inputRow input')) {
+         let inputRow = event.target.closest('.inputRow');
+         let parentCard = inputRow.closest('.card');
+         addTaskToCard(parentCard, event.target.value);
+         hideInputRow(parentCard);
+      }
+   });
+
+</script>
+</html>
